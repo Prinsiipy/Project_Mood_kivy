@@ -7,8 +7,7 @@ from pathlib import Path
 from hoverable import HoverBehavior
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
-#from kivy.uix.gridlayout import GridLayout
-# Shift + ALT + F to format JSON
+
 Builder.load_file('design.kv')
 
 class LoginScreen(Screen):
@@ -18,10 +17,10 @@ class LoginScreen(Screen):
     def login(self, uname, pword):
         with open("users.json") as file:
             users = json.load(file)
-        if uname in users and users[uname]['password'] == pword:
+        if uname in users and users[uname]['пароль'] == pword:
             self.manager.current = "login_screen_success"
         else:
-            self.ids.login_wrong.text = "Wrong username or password!"
+            self.ids.login_wrong.text = "Неверное имя пользователя или пароль!"
 
 
 
@@ -29,10 +28,10 @@ class SignUpScreen(Screen):
     def add_user(self, uname, pword):
         with open("users.json") as file:
             users = json.load(file)
-        
-        users[uname] = {'username': uname, 
-                        'password': pword, 
-                        'created' : datetime.now().strftime("%Y-%m-%d %H-%M-%S")}
+        3
+        users[uname] = {'имя пользователя': uname,
+                        'пароль': pword,
+                        'создать' : datetime.now().strftime("%Y-%m-%d %H-%M-%S")}
 
         with open("users.json", 'w') as file:
             json.dump(users, file)
@@ -58,7 +57,7 @@ class LoginScreenSuccess(Screen):
                 quotes = file.readlines()
             self.ids.quotes.text = random.choice(quotes)
         else:
-            self.ids.quotes.text = "Try another feeling!"
+            self.ids.quotes.text = "Попробуйте другое чувство!"
 
 class ImageButton(ButtonBehavior, Image, HoverBehavior):
     pass
